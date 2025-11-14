@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small custom animation keyframes */
+@keyframes fade-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+	animation: fade-in 600ms ease-out both;
+	will-change: opacity, transform;
+}
+
+/* Card hover subtle lift */
+.card-tilt {
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms cubic-bezier(.2,.9,.2,1);
+	transform-origin: center;
+	will-change: transform, box-shadow;
+}
+
+.card-tilt:hover {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: 0 10px 25px rgba(16,24,40,0.08), 0 4px 8px rgba(16,24,40,0.06);
+}
+
+/* Primary button style */
+.btn-primary, .btn-primary:visited {
+	background-color: #4f46e5; /* indigo-600 */
+	color: #fff;
+	padding: .5rem .75rem;
+	border-radius: .375rem;
+	transition: transform 180ms ease, box-shadow 180ms ease, opacity 160ms ease;
+}
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(79,70,229,0.14);
+}
+
+/* small button subtle scale */
+.btn {
+	transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.btn:active { transform: translateY(0); }
+
+/* Subtle focus styles for interactive elements */
+.focus-ring:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+	border-color: rgba(99,102,241,0.6);
+}
+
+/* Small utility: staggered fade-in (apply as needed) */
+.animate-fade-in-delayed {
+	animation: fade-in 620ms ease-out both;
+	animation-delay: 120ms;
+}
+
