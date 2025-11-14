@@ -134,3 +134,35 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## SQLite development snapshot (included)
+
+This repository includes a seeded SQLite database snapshot at `database/database.sqlite`. It is provided so contributors can immediately run the application with the same demo data without configuring MySQL.
+
+To use the snapshot locally:
+
+1. Ensure your `.env` uses the sqlite connection (or copy `.env.example` and edit):
+
+```powershell
+copy .env.example .env
+setx DB_CONNECTION sqlite
+setx DB_DATABASE database\database.sqlite
+```
+
+2. If the file is missing, create it and ensure correct permissions:
+
+```powershell
+New-Item -ItemType File -Path database\database.sqlite
+```
+
+3. Clear caches and start the dev server:
+
+```powershell
+C:\wamp64\bin\php\php8.2.0\php.exe artisan config:clear
+C:\wamp64\bin\php\php8.2.0\php.exe artisan view:clear
+C:\wamp64\bin\php\php8.2.0\php.exe artisan serve --host=127.0.0.1 --port=8000
+```
+
+If you prefer to use MySQL, update `.env` to set `DB_CONNECTION=mysql` and provide your MySQL credentials, then run `php artisan migrate --seed` (or remove the seeded sqlite file from the repo and re-seed into MySQL).
+
+Security note: the committed SQLite snapshot contains demo data only. If you add sensitive or production data, do not commit it.
