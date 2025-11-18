@@ -94,7 +94,7 @@ class ReservationController extends Controller
             abort(403);
         }
 
-        $reservation->status = 'validated'; // ou 'rejected' si c'est un rejet
+        $reservation->status = 'validated'; 
         $reservation->save();
 
     return redirect()->route('reservations.index')

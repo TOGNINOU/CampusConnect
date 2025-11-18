@@ -18,7 +18,7 @@ class UserController extends Controller
     // Formulaire création utilisateur
     public function create()
     {
-        return view('users.index')->with('success', 'Utilisateur ajouté !');;
+        return view('users.create')->with('success', 'Utilisateur ajouté !');;
     }
 
     // Enregistrer utilisateur

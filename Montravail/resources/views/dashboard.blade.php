@@ -22,6 +22,11 @@
                 </div>
             </div>
         </div>
+        <!-- Bouton de déconnexion -->
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger w-100">Se déconnecter</button>
+            </form>
         @endif
 
         {{--  Section admin --}}
@@ -44,11 +49,15 @@
             <h5 class="card-title">Gestion des utilisateurs</h5>
             <p class="text-muted small">Créer, modifier ou supprimer des utilisateurs.</p>
             <a href="{{ route('users.index') }}" class="btn btn-success w-100 mb-2">Voir tous les utilisateurs</a>
-            <a href="{{ route('users.create') }}" class="btn btn-primary w-100">Ajouter un utilisateur</a>
         </div>
     </div>
 </div>
-@endif
+        <!-- Bouton de déconnexion -->
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger w-100">Se déconnecter</button>
+            </form>
+       @endif
 
         {{--  Section étudiant --}}
         @if(Auth::user()->role === 'student')
@@ -61,9 +70,14 @@
                 </div>
             </div>
         </div>
+        <!-- Bouton de déconnexion -->
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger w-100">Se déconnecter</button>
+            </form>
         @endif
 
-        {{--  Section commune à tous --}}
+        <!-- {{--  Section commune à tous --}}
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-sm border-0">
                 <div class="card-body text-center">
@@ -72,12 +86,12 @@
                     <a href="{{ route('reservations.index') }}" class="btn btn-outline-primary w-100">Consulter</a>
                 </div>
             </div>
-            <!-- Bouton de déconnexion -->
-            <form method="POST" action="{{ route('logout') }}">
+            <-- Bouton de déconnexion -->
+            <!-- <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-danger w-100">Se déconnecter</button>
             </form>
-        </div>
+        </div>  -->
     </div>
 </div>
 @endsection
