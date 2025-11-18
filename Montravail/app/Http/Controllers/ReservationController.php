@@ -94,9 +94,12 @@ class ReservationController extends Controller
             abort(403);
         }
 
-        $reservation->update(['status' => 'validated']);
+        $reservation->status = 'validated'; // ou 'rejected' si c'est un rejet
+        $reservation->save();
 
-        return redirect()->back()->with('success', 'Réservation validée !');
+    return redirect()->route('reservations.index')
+
+        ->with('success', 'Réservation validée !');
     }
 
     // Rejeter une réservation (admin seulement)
@@ -107,9 +110,12 @@ class ReservationController extends Controller
             abort(403);
         }
 
-        $reservation->update(['status' => 'rejected']);
+        $reservation->status = 'validated'; // ou 'rejected' si c'est un rejet
+        $reservation->save();
 
-        return redirect()->back()->with('success', 'Réservation rejetée !');
+    return redirect()->route('reservations.index')
+
+    ->with('success', 'Réservation rejetée !');
     }
 
     // Affichage d'une réservation individuelle (facultatif)

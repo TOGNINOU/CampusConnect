@@ -34,10 +34,10 @@ Route::middleware('auth')->group(function () {
 
     // ----- ENSEIGNANTS -----
     Route::get('/debug-role', function () {
-    return Auth::user()->role ?? 'Aucun utilisateur connecté';
+        return Auth::user()->role ?? 'Aucun utilisateur connecté';
     
-})->middleware('auth');
-Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+    })->middleware('auth');
+    Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
         Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
         Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
@@ -48,8 +48,8 @@ Route::get('/reservations/create', [ReservationController::class, 'create'])->na
     // });
 
     // ----- ADMIN -----
-    Route::middleware('role:admin')->group(function () {
-        Route::post('/reservations/{reservation}/validate', [ReservationController::class, 'validateReservation'])->name('reservations.validate');
+    Route::middleware(['auth'])->group(function () {
+    Route::post('/reservations/{reservation}/validate', [ReservationController::class, 'validateReservation'])->name('reservations.validate');
         Route::post('/reservations/{reservation}/reject', [ReservationController::class, 'rejectReservation'])->name('reservations.reject');
         Route::patch('/reservations/{reservation}/admin-update', [ReservationController::class, 'update'])->name('reservations.admin-update');
 

@@ -12,8 +12,8 @@ class RoleMiddleware
     {
         $user = Auth::user();
 
-        if (!$user || $user->role !== $role) {
-            abort(403, 'Accès interdit');
+        if (!$user || $user->role !== $role) { // Assure-toi que ta table users a bien la colonne 'role'
+            abort(403, "Accès refusé");
         }
 
         return $next($request);
