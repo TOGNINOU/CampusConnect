@@ -25,7 +25,7 @@ class Reservation extends Model
         'end_at' => 'datetime',
     ];
 
-    // Status constants
+    // constantes de statut
     public const STATUS_PENDING = 'pending';
     public const STATUS_APPROVED = 'approved';
     public const STATUS_REJECTED = 'rejected';
@@ -51,7 +51,7 @@ class Reservation extends Model
     }
 
     /**
-     * Scope to check overlapping reservations
+     * Scope pour vérifier les réservations qui se chevauchent
      */
     public function scopeOverlapping($query, $start, $end)
     {

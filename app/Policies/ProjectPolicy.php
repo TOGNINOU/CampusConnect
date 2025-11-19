@@ -27,7 +27,7 @@ class ProjectPolicy
 
     public function create(User $user): bool
     {
-        // only students may create projects
+        // seuls les étudiants peuvent créer des projets
         return $user != null && $user->isStudent();
     }
 
@@ -50,7 +50,7 @@ class ProjectPolicy
 
     public function uploadDeliverable(User $user, Project $project): bool
     {
-        // members, owners, supervisors and admins can upload
+        // membres, propriétaires, superviseurs et administrateurs peuvent téléverser
         if ($user->isAdmin() ?? false) return true;
         if ($project->supervisor_id && $project->supervisor_id === $user->id) return true;
         return $project->users()->where('user_id', $user->id)->exists();

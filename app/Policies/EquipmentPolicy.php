@@ -8,20 +8,20 @@ use App\Models\User;
 class EquipmentPolicy
 {
     /**
-     * Determine whether the user can view the equipment.
+     * Détermine si l'utilisateur peut consulter le matériel.
      */
     public function view(?User $user, Equipment $equipment): bool
     {
-        // Any authenticated or guest user can view equipment; we'll allow authenticated users to consult availability.
+        // Tout utilisateur (authentifié ou invité) peut consulter le matériel.
         return true;
     }
 
     /**
-     * Determine whether the user can create equipment.
+     * Détermine si l'utilisateur peut créer du matériel.
      */
     public function create(User $user): bool
     {
-        // Only administrators may manage (create) equipments.
+        // Seuls les administrateurs peuvent gérer/ajouter du matériel.
         return $user->isAdmin();
     }
 

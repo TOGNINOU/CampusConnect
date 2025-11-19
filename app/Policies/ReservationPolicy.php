@@ -7,25 +7,25 @@ use App\Models\User;
 class ReservationPolicy
 {
     /**
-     * Determine whether the user can create reservations.
+     * Détermine si l'utilisateur peut créer des réservations.
      */
     public function create(User $user): bool
     {
-        // Only teachers and admins can create reservations. Students may only consult availability.
+        // Seuls les enseignants et les administrateurs peuvent créer des réservations. Les étudiants peuvent seulement consulter la disponibilité.
         return in_array($user->role, ['teacher', 'admin']);
     }
 
     /**
-     * Determine whether the user can view the reservation.
+     * Détermine si l'utilisateur peut consulter la réservation.
      */
     public function view(User $user, Reservation $reservation): bool
     {
-        // admin can view any reservation, owner can view their reservation
+        // Un administrateur peut voir n'importe quelle réservation ; le propriétaire peut voir sa propre réservation
         return $user->isAdmin() || $reservation->user_id === $user->id;
     }
 
     /**
-     * Determine whether the user can approve/reject the reservation.
+     * Détermine si l'utilisateur peut valider/rejeter la réservation.
      */
     public function approve(User $user, Reservation $reservation): bool
     {

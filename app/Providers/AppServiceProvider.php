@@ -20,8 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Fix for MySQL older versions: limit default string length to avoid
-        // "Specified key was too long" errors when creating unique indexes
+        // Correction pour les anciennes versions de MySQL : limiter la longueur par défaut
+        // des chaînes pour éviter les erreurs "Specified key was too long" lors de
+        // la création d'index uniques
         Schema::defaultStringLength(191);
     }
 }
