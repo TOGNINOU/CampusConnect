@@ -148,6 +148,11 @@ class ReservationController extends Controller
             'status' => 'required|in:approved,rejected',
         ]);
 
+        // Only allow changing status if reservation is still pending
+        if ($reservation->status !== \App\Models\Reservation::STATUS_PENDING) {
+            return redirect()->route('reservations.index')->with('warning', 'Cette réservation a déjà été traitée.');
+        }
+
         $reservation->status = $data['status'];
         $reservation->admin_id = $user->id;
         $reservation->save();

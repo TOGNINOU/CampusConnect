@@ -20,12 +20,16 @@
                 <div class="text-right">
                     <a href="{{ route('reservations.show', $r) }}" class="text-indigo-600 text-sm">Voir</a>
                     @if(auth()->user()->isAdmin())
-                        <form method="POST" action="{{ route('reservations.update', $r) }}" class="mt-2">
-                            @csrf
-                            @method('PUT')
-                            <button name="status" value="approved" class="px-2 py-1 bg-green-600 text-white rounded text-sm">Valider</button>
-                            <button name="status" value="rejected" class="px-2 py-1 bg-red-600 text-white rounded text-sm">Rejeter</button>
-                        </form>
+                        @if($r->status === \App\Models\Reservation::STATUS_PENDING)
+                            <form method="POST" action="{{ route('reservations.update', $r) }}" class="mt-2">
+                                @csrf
+                                @method('PUT')
+                                <button name="status" value="approved" class="px-2 py-1 bg-green-600 text-white rounded text-sm">Valider</button>
+                                <button name="status" value="rejected" class="px-2 py-1 bg-red-600 text-white rounded text-sm">Rejeter</button>
+                            </form>
+                        @else
+                            <div class="mt-2 text-sm text-gray-500">Traitée : <span class="font-medium">{{ $r->status }}</span>@if($r->admin) — par {{ $r->admin->name }}@endif</div>
+                        @endif
                     @endif
                 </div>
             </div>
