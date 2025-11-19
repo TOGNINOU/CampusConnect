@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.index');
     // Declare the events route before the reservations resource so "reservations/{reservation}"
     // does not greedily capture the "events" segment and cause a 404 via model binding.
-    Route::get('reservations/events', [App\Http\Controllers\ReservationController::class, 'events'])->name('reservations.events');
+    // NOTE: we keep the calendar page behind auth but make the events endpoint public
+    // so client-side fetch requests can succeed even if credentials/cookies are not sent.
     Route::resource('reservations', App\Http\Controllers\ReservationController::class)->except(['edit']);
     
     // Module 3 - Projects (full web resource: index, create, store, show, edit, update, destroy)
@@ -43,5 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('projects/{project}/deliverables/{deliverable}', [App\Http\Controllers\ProjectDeliverableController::class, 'download'])->name('projects.deliverables.download');
     Route::delete('projects/{project}/deliverables/{deliverable}', [App\Http\Controllers\ProjectDeliverableController::class, 'destroy'])->name('projects.deliverables.destroy');
 });
+
+// Public endpoint for calendar event loading (returns approved reservations by default)
+Route::get('reservations/events', [App\Http\Controllers\ReservationController::class, 'events'])->name('reservations.events');
 
 require __DIR__.'/auth.php';
